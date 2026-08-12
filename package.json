@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chroma-js": "^3.1.2"
+    "@types/chroma-js": "^3.1.2",
+    "chroma-js": "^3.2.0"
   }
 }
