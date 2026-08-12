@@ -1,8 +1,8 @@
-
-
 # Agent Guidelines & Project Instructions
 
 This project is transitioning from a Node.js CLI script (`generatePalette.js`) to a full-featured web UI built with React, Vite, TypeScript, and Tailwind CSS.
+
+"You must strictly invoke tools using the provided native system function calls. Do NOT write <function_code> or pseudo-code blocks in your text responses."
 
 ---
 
