@@ -1,16 +1,33 @@
 {
   "name": "color-palette-generator",
-  "version": "1.0.0",
-  "description": "",
-  "main": "generatePalette.js",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "A modern dark-themed React + Vite + TypeScript web application for generating color palettes",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chroma-js": "^3.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/chroma-js": "^3.1.2",
-    "chroma-js": "^3.2.0"
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vitest": "^3.2.7"
   }
 }
