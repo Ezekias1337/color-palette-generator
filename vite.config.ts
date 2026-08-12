@@ -7,6 +7,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/color-palette-generator/',
   server: {
     watch: {
       ignored: ['**/_variables.scss'],
