@@ -1,39 +1,58 @@
 
-# Open Code `/loop-goal` Prompt
-
-Copy and paste the prompt below directly into Open Code:
-
-```text
-/loop-goal Convert this CLI project into a modern Dark-themed React + Vite + TypeScript web application using the existing palette logic in generatePalette.js.
+/loop-goal Revise `src/App.tsx` to add a SCSS variables export option to the `handleExport` function.
 
 Execute this transformation step-by-step in the following sequence:
 
-Step 1: Setup & Dependencies
-- Initialize React, Vite, TypeScript, and Tailwind CSS in the project root if not already configured.
-- Ensure package.json has scripts for "dev", "build", and "test".
-- Configure Tailwind CSS with dark mode enabled by default and dark UI base styles in index.css.
+Step 1: Inspect Export Logic & Types
 
-Step 2: Refactor Legacy Logic to TypeScript
-- Read and analyze `generatePalette.js`.
-- Port the exact color generation math and algorithms into `src/utils/paletteGenerator.ts` using strict TypeScript interfaces for Color, Palette, and Harmony types.
-- Create `src/utils/colorUtils.ts` for clean color format conversions (HEX <-> RGB <-> HSL) and WCAG contrast calculations.
-- Add unit tests verifying that `paletteGenerator.ts` outputs valid colors matching the legacy CLI results.
+- Analyze `src/App.tsx` and identify the existing `handleExport` implementation, export modal/dropdown state, and export format types.
+- Determine how color, typography, border-radius, and shadow state properties map into export string templates.
 
-Step 3: Core UI & Layout Component
-- Create a main dark-mode layout in `App.tsx` featuring a header, tool area, palette grid, and control panel.
-- Implement `BaseColorPicker.tsx` allowing users to select or enter a seed color (via native color input, HEX text input, or harmony dropdown).
+Step 2: Implement SCSS Export Generator
 
-Step 4: Image Color Extraction Component
-- Build `ImageColorPicker.tsx` which allows users to upload an image file (PNG/JPG/WebP).
-- Render the image on an HTML5 `<canvas>`.
-- Add interactive crosshair / eyedropper behavior on hover/click to sample the pixel color under the cursor and set it as the active base color for the palette generator.
+- Add a dedicated generator function or case handler (e.g., `generateScssExport`) to format variables with SCSS syntax (`$variable-name: value;`).
+- Group output logically with standard SCSS block comments:
+  - Color palettes (`$primary-*`, `$success-*`, `$warning-*`, `$error-*`, `$info-*`, `$neutral-*`)
+  - Transparent variants (`$transparent-black-*` using `rgba($neutral-900, alpha)`)
+  - Typography (`$header-*`, `$paragraph`, `$small`, `$extra-small`, `$font-family`)
+  - Borders (`$border-radius`, `$surface-border-radius`)
+  - Shadows & Glows (`$*-shadow`, `$*-glow` using `rgba(...)` references)
 
-Step 5: Palette Grid & Interactivity
-- Build `PaletteDisplay.tsx` displaying the generated color palette swatches.
-- Add features: lock/unlock individual slots, copy HEX code to clipboard on click with toast notification, and spacebar hotkey listener to regenerate unlocked colors.
-- Build `ExportModal.tsx` to export palette as CSS variables, Tailwind config, or JSON.
+Step 3: Update UI & Export Options
 
-Step 6: Verification
+- Add `"scss"` as an allowed export format selection in the export modal/controls in `src/App.tsx`.
+- Wire `handleExport` to output and trigger download/copy for `.scss` files with the appropriate `text/x-scss` or `text/plain` MIME type.
+
+Step 4: Verification
+
+- Verify that selecting SCSS export produces syntactically valid SCSS code matching the target schema.
 - Run type checking and build (`npm run build`) to ensure zero TypeScript errors.
-- Confirm dark UI styling across all controls and components.
-```
+
+/loop-goal Revise `src/App.tsx` to add a SCSS variables export option to the `handleExport` function.
+
+Execute this transformation step-by-step in the following sequence:
+
+Step 1: Inspect Export Logic & Types
+
+- Analyze `src/App.tsx` and identify the existing `handleExport` implementation, export modal/dropdown state, and export format types.
+- Determine how color, typography, border-radius, and shadow state properties map into export string templates.
+
+Step 2: Implement SCSS Export Generator
+
+- Add a dedicated generator function or case handler (e.g., `generateScssExport`) to format variables with SCSS syntax (`$variable-name: value;`).
+- Group output logically with standard SCSS block comments:
+  - Color palettes (`$primary-*`, `$success-*`, `$warning-*`, `$error-*`, `$info-*`, `$neutral-*`)
+  - Transparent variants (`$transparent-black-*` using `rgba($neutral-900, alpha)`)
+  - Typography (`$header-*`, `$paragraph`, `$small`, `$extra-small`, `$font-family`)
+  - Borders (`$border-radius`, `$surface-border-radius`)
+  - Shadows & Glows (`$*-shadow`, `$*-glow` using `rgba(...)` references)
+
+Step 3: Update UI & Export Options
+
+- Add `"scss"` as an allowed export format selection in the export modal/controls in `src/App.tsx`.
+- Wire `handleExport` to output and trigger download/copy for `.scss` files with the appropriate `text/x-scss` or `text/plain` MIME type.
+
+Step 4: Verification
+
+- Verify that selecting SCSS export produces syntactically valid SCSS code matching the target schema.
+- Run type checking and build (`npm run build`) to ensure zero TypeScript errors.

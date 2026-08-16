@@ -3,7 +3,7 @@ import type { HarmonyResult } from '../types/palette'
 interface ExportModalProps {
   harmony: HarmonyResult
   onClose: () => void
-  onExport: (type: 'css' | 'tailwind' | 'json') => void
+  onExport: (type: 'css' | 'tailwind' | 'json' | 'scss') => void
 }
 
 export default function ExportModal({ harmony, onClose, onExport }: ExportModalProps) {
@@ -42,6 +42,13 @@ export default function ExportModal({ harmony, onClose, onExport }: ExportModalP
             >
               <span className="text-2xl">JSON</span>
               <span className="text-sm font-medium">JSON</span>
+            </button>
+            <button
+              onClick={() => onExport('scss')}
+              className="btn-secondary flex flex-col items-center gap-2 py-4"
+            >
+              <span className="text-2xl">SCSS</span>
+              <span className="text-sm font-medium">SCSS Variables</span>
             </button>
           </div>
 

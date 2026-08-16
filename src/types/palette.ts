@@ -52,6 +52,6 @@ export interface PaletteState {
 }
 
 export interface ExportData {
-  type: 'css' | 'tailwind' | 'json';
+  type: 'css' | 'tailwind' | 'json' | 'scss';
   content: string;
 }

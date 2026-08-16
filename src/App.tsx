@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { generatePalette } from './utils/paletteGenerator'
+import { generatePalette, generateSCSS } from './utils/paletteGenerator'
 import type { HarmonyResult } from './types/palette'
 import BaseColorPicker from './components/BaseColorPicker'
 import ImageColorPicker from './components/ImageColorPicker'
@@ -38,7 +38,19 @@ export default function App() {
     setTimeout(() => setToast(null), 2000)
   }, [])
 
-  const handleExport = useCallback((type: 'css' | 'tailwind' | 'json') => {
+  const handleDownload = useCallback((content: string, filename: string, mimeType: string) => {
+    const blob = new Blob([content], { type: mimeType })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }, [])
+
+  const handleExport = useCallback((type: 'css' | 'tailwind' | 'json' | 'scss') => {
     if (!harmony) return
     let content = ''
     if (type === 'css') {
@@ -59,6 +71,9 @@ export default function App() {
         }
       }
       content += '      }\n    }\n  }\n}'
+    } else if (type === 'scss') {
+      content = generateSCSS(harmony)
+      handleDownload(content, 'palette.scss', 'text/x-scss')
     } else {
       content = JSON.stringify(harmony, null, 2)
     }
